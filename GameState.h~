@@ -1,0 +1,52 @@
+#ifndef __GameState_h_
+#define __GameState_h_
+
+#include <OISKeyboard.h>
+#include <OISMouse.h>
+#include <OgreCamera.h>
+#include <OgreEntity.h>
+#include <OgreLogManager.h>
+#include <OgreRoot.h>
+#include <OgreViewport.h>
+#include <OgreSceneManager.h>
+#include <OgreRenderWindow.h>
+#include <OgreConfigFile.h>
+#include <btBulletDynamicsCommon.h>
+#include <CEGUI/CEGUI.h>
+#include <CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h>
+#include "GameObject.h"
+#include "SoundManager.h"
+#include <list>
+#include <stdlib.h> 
+
+
+
+class GameState{
+	public:
+		GameState(void);
+		void updatePaddle(const OIS::MouseEvent &arg);
+		void updateAIpaddle(void);		
+		void stepSimulation(void);
+		void initialise(Ogre::SceneManager* m);
+		void initialiseMenu(Ogre::SceneManager* m);
+		bool gameOver;
+		bool multiplayer;
+		int score;
+		int pingPong;
+		bool menuInput;
+		
+
+	protected:
+	  int addScore(bool reset);
+		Ogre::SceneManager* mSceneMgr;
+	    btDiscreteDynamicsWorld* dynamicsWorld;
+	    btRigidBody* fallRigidBody;
+	    btRigidBody* groundRigidBody;
+	    std::list<GameObject*> l;
+	    GameObject* paddle;
+	    GameObject* ball;
+  	  GameObject* AIpaddle;
+  	  CEGUI::OgreRenderer* mRenderer;
+};
+#endif
+

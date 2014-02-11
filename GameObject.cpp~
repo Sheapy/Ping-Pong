@@ -1,0 +1,33 @@
+#include "GameObject.h"
+
+GameObject::GameObject(void)
+{
+	
+}
+
+void GameObject::construct(Ogre::SceneNode* s, btRigidBody* r, int i){
+	sNode=s;
+	rBody=r;
+	id=i;
+	collisionCount=0;
+	highscore=0;
+}
+
+void GameObject::sync(void){
+	btTransform trans;
+    rBody->getMotionState()->getWorldTransform(trans);
+    sNode->setPosition(Ogre::Vector3(trans.getOrigin().getX(),trans.getOrigin().getY(),trans.getOrigin().getZ()));
+}
+
+int GameObject::updateCollisionCount(bool reset)
+{
+  if (reset) {
+    collisionCount = 0;
+    if (collisionCount > highscore)
+      highscore = collisionCount;
+  }
+  else
+    collisionCount++;
+  return collisionCount;
+}
+  

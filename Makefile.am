@@ -1,0 +1,9 @@
+noinst_HEADERS = TutorialApplication.h BaseApplication.h GameState.h GameObject.h SoundManager.h ServerGameState.h ClientGameState.h tcpserver.h
+bin_PROGRAMS = assignment2
+assignment2_CPPFLAGS = -I$(top_srcdir)
+assignment2_SOURCES = TutorialApplication.cpp BaseApplication.cpp GameState.cpp GameObject.cpp SoundManager.cpp ServerGameState.cpp ClientGameState.cpp tcpserver.cpp
+assignment2_CXXFLAGS = $(OGRE_CFLAGS) $(OIS_CFLAGS) $(bullet_CFLAGS) $(SDL_mixer_CFLAGS)
+assignment2_LDADD = $(OGRE_LIBS) $(OIS_LIBS) $(bullet_LIBS) $(SDL_mixer_LIBS) $(CEGUI_OGRE_LIBS) $(CEGUI_LIBS) -lboost_system -lboost_serialization -lboost_thread
+
+EXTRA_DIST = buildit makeit
+AUTOMAKE_OPTIONS = foreign
